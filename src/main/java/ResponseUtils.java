@@ -36,4 +36,11 @@ public class ResponseUtils {
                 .orElseThrow(() -> new RuntimeException("Didn't find any header: " + headerName));
         return matchHeader.getValue();
     }
+
+    public static boolean headerIsPresent(CloseableHttpResponse response, String headerName) {
+        //Get all Headers
+        List<Header> httpHeaders = Arrays.asList(response.getAllHeaders());
+        return httpHeaders.stream()
+                .anyMatch(header -> header.getName().equalsIgnoreCase(headerName));
+    }
 }

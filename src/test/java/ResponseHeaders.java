@@ -4,12 +4,14 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 public class ResponseHeaders extends BaseClass {
     CloseableHttpClient client;
@@ -51,5 +53,13 @@ public class ResponseHeaders extends BaseClass {
         response = client.execute(get);
         String limit = ResponseUtils.getHeaderJava8Way(response, "X-RateLimit-Limit");
         assertEquals(limit, "60");
+    }
+
+    @Test
+    public void eTagIsPresent() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT);
+        response = client.execute(get);
+        boolean tagIsPresent = ResponseUtils.headerIsPresent(response, "ETag");
+        assertTrue(tagIsPresent);
     }
 }
