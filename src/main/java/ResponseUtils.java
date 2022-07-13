@@ -26,4 +26,14 @@ public class ResponseUtils {
         //Return the header
         return returnHeader;
     }
+
+    public static String getHeaderJava8Way(CloseableHttpResponse response, String headerName) {
+        //Get all Headers
+        List<Header> httpHeaders = Arrays.asList(response.getAllHeaders());
+        Header matchHeader = httpHeaders.stream()
+                .filter(header -> headerName.equalsIgnoreCase(header.getName()))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Didn't find any header: " + headerName));
+        return matchHeader.getValue();
+    }
 }

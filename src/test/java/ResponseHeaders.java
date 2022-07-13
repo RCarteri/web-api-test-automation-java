@@ -43,6 +43,13 @@ public class ResponseHeaders extends BaseClass {
         response = client.execute(get);
         String header = ResponseUtils.getHeader(response, "Server");
         assertEquals(header, "GitHub.com");
-        System.out.println(header);
+    }
+
+    @Test
+    public void xRateLimitIsSixty() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT);
+        response = client.execute(get);
+        String limit = ResponseUtils.getHeaderJava8Way(response, "X-RateLimit-Limit");
+        assertEquals(limit, "60");
     }
 }
