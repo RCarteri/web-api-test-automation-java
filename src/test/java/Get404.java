@@ -10,8 +10,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 
-public class Get404 {
-    public static final String BASE_ENDPOINT = "http://api.github.com";
+public class Get404 extends BaseClass {
     CloseableHttpClient client;
     CloseableHttpResponse response;
 
