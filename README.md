@@ -1,0 +1,7 @@
+#Getting Started with Web API Test Automation in Java
+
+by Andrejs Doronins at Pluralsight
+
+Learn how to write automated tests for a Web API using the popular Java Apache HttpClient library to achieve faster and more reliable delivery of Quality Assurance within the SDLC.
+
+In today's world, software development companies are pressured to deliver a product faster than ever before. This means a shorter Software Development Life Cycle (SDLC) must be achieved, and thus the testing process must keep up the pace. In this course, Getting Started with Web API Test Automation in Java, you will learn how to deliver faster yet high-standard quality assurance to a Web API. First, you will get an overview of the fundamental theory that surrounds Web APIs including how a Web API works and the necessary basic HTTP concepts that you need to get started. Next, you will learn about and get hands-on practice with various tools that can help you to automate tests and you will understand their strengths and weaknesses. Finally, you will write your own small testing framework in Java to achieve test automation. By the end of this course, you will have learned how to approach Web API test automation, decide what solutions are appropriate to your specific needs and the practical coding skills to achieve faster testing. All of this will serve you as a foundation to further develop a fully automated approach to testing within the SDLC.
