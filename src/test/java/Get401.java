@@ -10,7 +10,7 @@ import java.io.IOException;
 
 import static org.testng.Assert.assertEquals;
 
-public class Get200 {
+public class Get401 {
     public static final String BASE_ENDPOINT = "http://api.github.com";
     CloseableHttpClient client;
     CloseableHttpResponse response;
@@ -27,26 +27,26 @@ public class Get200 {
     }
 
     @Test
-    public void baseUrlReturns200() throws IOException {
-        HttpGet get = new HttpGet(BASE_ENDPOINT);
+    public void userReturns401() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/user");
         response = client.execute(get);
         int status = response.getStatusLine().getStatusCode();
-        assertEquals(status, 200);
+        assertEquals(status, 401);
     }
 
     @Test
-    public void rateLimitReturns200() throws IOException {
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/rate_limit");
+    public void userFollowersReturns401() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/user/followers");
         response = client.execute(get);
         int status = response.getStatusLine().getStatusCode();
-        assertEquals(status, 200);
+        assertEquals(status, 401);
     }
 
     @Test
-    public void searchReposReturns200() throws IOException {
-        HttpGet get = new HttpGet(BASE_ENDPOINT + "/search/repositories?q=java");
+    public void notificationsReturns401() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/notifications");
         response = client.execute(get);
         int status = response.getStatusLine().getStatusCode();
-        assertEquals(status, 200);
+        assertEquals(status, 401);
     }
 }
