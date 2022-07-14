@@ -1,22 +1,16 @@
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import entities.NotFound;
+import entities.RateLimit;
 import entities.User;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.util.EntityUtils;
-import org.json.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-import static entities.User.ID;
-import static entities.User.LOGIN;
-import static org.testng.Assert.*;
 import static org.testng.Assert.assertEquals;
 
 public class BodyTestWithJackson extends BaseClass {
@@ -38,7 +32,7 @@ public class BodyTestWithJackson extends BaseClass {
     public void returnsCorrectLogin() throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + "/users/andrejss88");
         response = client.execute(get);
-       User user = ResponseUtils.unMarshall(response, User.class);
+       User user = ResponseUtils.unMarshallGeneric(response, User.class);
        assertEquals(user.getLogin(), "andrejss88");
     }
 
@@ -46,7 +40,15 @@ public class BodyTestWithJackson extends BaseClass {
     public void returnsCorrectId() throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + "/users/andrejss88");
         response = client.execute(get);
-        User user = ResponseUtils.unMarshall(response, User.class);
+        User user = ResponseUtils.unMarshallGeneric(response, User.class);
         assertEquals(user.getId(), 11834443);
+    }
+
+    @Test
+    public void notFoundMessageIsCorrect() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/nonexistingendpoint");
+        response = client.execute(get);
+        NotFound notFoundMessage = ResponseUtils.unMarshallGeneric(response, NotFound.class);
+        assertEquals(notFoundMessage.getMessage()   , "Not Found");
     }
 }
