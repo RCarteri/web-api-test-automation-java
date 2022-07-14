@@ -51,4 +51,13 @@ public class BodyTestWithJackson extends BaseClass {
         NotFound notFoundMessage = ResponseUtils.unMarshallGeneric(response, NotFound.class);
         assertEquals(notFoundMessage.getMessage()   , "Not Found");
     }
+
+    @Test
+    public void correctRateLimitAreSet() throws IOException {
+        HttpGet get = new HttpGet(BASE_ENDPOINT + "/rate_limit");
+        response = client.execute(get);
+        RateLimit rateLimits = ResponseUtils.unMarshallGeneric(response, RateLimit.class);
+        assertEquals(rateLimits.getCoreLimit()   , 60);
+        assertEquals(rateLimits.getSearchLimit()   , "10");
+    }
 }
