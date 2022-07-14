@@ -32,7 +32,7 @@ public class BodyTestWithJackson extends BaseClass {
     public void returnsCorrectLogin() throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + "/users/andrejss88");
         response = client.execute(get);
-       User user = ResponseUtils.unMarshallGeneric(response, User.class);
+       User user = ResponseUtils.unmarshallGeneric(response, User.class);
        assertEquals(user.getLogin(), "andrejss88");
     }
 
@@ -40,7 +40,7 @@ public class BodyTestWithJackson extends BaseClass {
     public void returnsCorrectId() throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + "/users/andrejss88");
         response = client.execute(get);
-        User user = ResponseUtils.unMarshallGeneric(response, User.class);
+        User user = ResponseUtils.unmarshallGeneric(response, User.class);
         assertEquals(user.getId(), 11834443);
     }
 
@@ -48,7 +48,7 @@ public class BodyTestWithJackson extends BaseClass {
     public void notFoundMessageIsCorrect() throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + "/nonexistingendpoint");
         response = client.execute(get);
-        NotFound notFoundMessage = ResponseUtils.unMarshallGeneric(response, NotFound.class);
+        NotFound notFoundMessage = ResponseUtils.unmarshallGeneric(response, NotFound.class);
         assertEquals(notFoundMessage.getMessage()   , "Not Found");
     }
 
@@ -56,7 +56,7 @@ public class BodyTestWithJackson extends BaseClass {
     public void correctRateLimitAreSet() throws IOException {
         HttpGet get = new HttpGet(BASE_ENDPOINT + "/rate_limit");
         response = client.execute(get);
-        RateLimit rateLimits = ResponseUtils.unMarshallGeneric(response, RateLimit.class);
+        RateLimit rateLimits = ResponseUtils.unmarshallGeneric(response, RateLimit.class);
         assertEquals(rateLimits.getCoreLimit()   , 60);
         assertEquals(rateLimits.getSearchLimit()   , "10");
     }
