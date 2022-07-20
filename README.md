@@ -1,4 +1,4 @@
-#Getting Started with Web API Test Automation in Java
+# Getting Started with Web API Test Automation in Java
 
 by Andrejs Doronins at Pluralsight
 
